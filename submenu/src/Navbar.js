@@ -6,10 +6,13 @@ import { useGlobalContext } from './context'
 
 const Navbar = () => {
   
-  const { openSidebar, openSubmenu, closeSubmenu } = useGlobalContext;
+  const { openSidebar, openSubmenu, closeSubmenu } = useGlobalContext();
   const dispalySubmenu = (e) => {
-
-    openSubmenu()
+    const page = e.target.textContent;
+    const tempBtn = e.target.getBoundingClientRect();
+    const center = (tempBtn.left + tempBtn.right)/2;
+    const bottom = tempBtn.bottom -3
+    openSubmenu(page,{center, bottom})
   }
 
   return ( 
@@ -22,7 +25,7 @@ const Navbar = () => {
           <button className='btn togglr-btn' onClick={openSidebar}>
             <FaBars />
           </button>
-        </div>
+        </div> 
         <ul className='nav-links'>
           <li>
             <button className='link-btn' onMouseOver={dispalySubmenu} >
